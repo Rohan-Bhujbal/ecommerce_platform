@@ -1,0 +1,342 @@
+<html>
+<head>
+    <title>API</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <style>
+        .card {
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .card-text {
+            overflow: auto;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+           
+            var userData = {
+                "title": "User",
+                "actions": [
+                    {"title": "Add", "data": '{ "transmit": "broadcast", "url": "user_add", "request" : { "full_name" : "rm", "email":"rm@appristine.in","mobile":"1122334455","address":"pune","password":"Ram@1234","user_type":"manager","permissions":"manager", "is_active" : true, "related_id" :"4e670209-e0e7-4f6a-94e9-1441310133be"} }'},
+                    {"title": "Edit", "data": '{ "transmit": "broadcast", "url": "user_edit", "request" : { "full_name" : "ram", "email":"ram@appristine.in","mobile":"1122334455","address":"pune","user_type":"manager","permissions":"manager", "is_active" : true,"userid":"a72e27c2-ee62-465f-8f5c-eb0874c4ef28", "related_id":"4e670209-e0e7-4f6a-94e9-1441310133be"} }'},
+                    {"title": "List", "data": '{ "transmit": "broadcast", "url": "user_list", "request" : { "status" : true, "limit" : "20", "page_no" : "1", "search" : "", "order_by" :"-updated_at"} }'}
+                ]
+            };
+
+            var jsonArray = [userData];
+            $.each(jsonArray, function(index, jsonObject){
+                var html = '<tr>';
+                html = html+'<td>' + ( index + 1 ) + '</td>';
+                html = html+'<td>' + jsonObject.title + '</td>';
+                html = html+'<td>';
+                    $.each(jsonObject.actions, function(index, action){
+                        html = html+'<div class="card">';
+                        html = html+'<div class="card-title">' + action.title + '</div>';
+                        html = html+'<div class="card-text"><textarea class="form-control" readonly>' + action.data + '</textarea></div>';
+                        html = html+'</div>';
+                    });
+                html = html+'</td>';
+                html = html+'</tr>';
+                $('#ws_output').append(html);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container mt-3">
+        <p>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                data-bs-target="#multiCollapseExample1" aria-expanded="false"
+                aria-controls="multiCollapseExample1">API</button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">WEB
+                SOCKET</button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse"
+                aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle Both</button>
+        </p>
+        <div class="row mt-3">
+            <div class="col">
+                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <div class="card card-body" style="border-color:#0d6efd!important">
+                        <!-- Login -->
+                        <div class="card card-body">
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">TITLE</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" value="Login">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">POST URL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" value="user/login">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">REQUEST</label>
+                                <div class="col-sm-10">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            {"email":"example@domain.com","password":"Example","device_type":"web","device_id":"19216811"}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- User Logout -->
+                        <div class="card card-body">
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">TITLE</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" value="Logout">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">GET URL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" value="user/logout">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">HEADER</label>
+                                <div class="col-sm-10">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            Authorization : Bearer {token}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Upload File  -->
+                        <div class="card card-body">
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">TITLE</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" value="Upload File">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">POST URL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" value="file/upload">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">REQUEST</label>
+                                <div class="col-sm-10">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            multipart file object with <span class="badge bg-primary">file</span> name
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">HEADER</label>
+                                <div class="col-sm-10">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            Authorization : Bearer {token}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Get File Detail -->
+                        <div class="card card-body">
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">TITLE</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" value="Get File Detail">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">GET URL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                        value="file/detail/<str:file_id>">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">HEADER</label>
+                                <div class="col-sm-10">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            Authorization : Bearer {token}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- View File -->
+                        <div class="card card-body">
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">TITLE</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" value="View File">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">GET URL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                        value="file/view/<str:type>/<str:id>">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">HEADER</label>
+                                <div class="col-sm-10">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            Authorization : Bearer {token}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <pre>
+                                type : file, thumbnail
+                            </pre>
+                        </div>
+                        <!-- Magic URL -->
+                        <div class="card card-body">
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">TITLE</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" value="Magic URL">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">POST URL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                        value="user/get_magic_code">
+                                    {"device_type":"web","device_id":"1"}
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">HEADER</label>
+                                <div class="col-sm-10">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            Authorization : Bearer {token}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">GET URL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                        value="user/set_login/<str:magic_code>/<str:device_id>/<str:device_type>">
+                                    <input type="text" readonly class="form-control-plaintext" value="user/get_login">
+                                    <input type="text" readonly class="form-control-plaintext" value="user/del_login">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <div class="collapse show multi-collapse" id="multiCollapseExample2">
+                    <div class="card card-body" style="border-color:#0d6efd!important">
+                        <div class="card card-body">
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">URL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" value="ws/{token}/">
+                                </div>
+                            </div>
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Key</th>
+                                        <th scope="col">Values</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>transmit</td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-primary">single</span>
+                                            <span class="badge rounded-pill bg-primary">broadcast</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>limit</td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-primary">1 to 5000</span>
+                                            <span class="badge rounded-pill bg-primary">depending on show per
+                                                page</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>page_no</td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-primary">1 to total no of
+                                                pages</span>
+                                            <span class="badge rounded-pill bg-primary">depending total pages</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>status</td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-primary">""</span>
+                                            <span class="badge rounded-pill bg-primary">true</span>
+                                            <span class="badge rounded-pill bg-primary">false</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>search</td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-primary">""</span>
+                                            <span class="badge rounded-pill bg-primary">search value</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>order_by</td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-primary">""</span>
+                                            <span class="badge rounded-pill bg-primary">order by column name</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr />
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" width="50">#</th>
+                                        <th scope="col" width="150">TITLE</th>
+                                        <th scope="col">REQUEST</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ws_output">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</body>
+
+</html>
