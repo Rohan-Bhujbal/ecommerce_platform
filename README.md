@@ -16,4 +16,14 @@ Run the Django migration command
 
 Start python server
 
+Follow the following steps to run the frontend application
+
+Install Node.js and React.js using NVM (Node Version Manager)
+
+npm install 
+
+npm build
+
+npm start
+
 
